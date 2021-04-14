@@ -4,14 +4,13 @@
 
 <script>
 import { merge } from "lodash";
-import ResizeListener from "element-resize-detector";
 import BASIC_OPTION from "./default_option";
 import COLORS from "./colors";
-import { mixin } from "./mixin";
+import { chartMixin } from "./mixin";
 
 export default {
   name: "chart",
-  mixins: [mixin],
+  mixins: [chartMixin],
   props: {
     seriesData: {
       type: Array,
@@ -23,11 +22,6 @@ export default {
       default: () => ({}),
     },
   },
-  // data() {
-  //   return {
-  //     chart: null,
-  //   };
-  // },
   watch: {
     seriesData: {
       deep: true,
@@ -37,14 +31,8 @@ export default {
     },
   },
   mounted() {
-    console.log(this);
     this.chart = this.$echarts.init(this.$el, "light");
     this.updateChartView();
-    window.addEventListener("resize", this.handleWindowResize);
-    this.addChartResizeListener();
-  },
-  beforeDestroy() {
-    window.removeEventListener("resize", this.handleWindowResize);
   },
   methods: {
     /**
@@ -63,7 +51,6 @@ export default {
 
       return merge(
         {},
-
         BASIC_OPTION,
         { color: COLORS },
         {
@@ -73,38 +60,13 @@ export default {
         this.extraOption
       );
     },
-
-    // /**
-    //  * 对chart元素尺寸进行监听，当发生变化时同步更新echart视图
-    //  */
-    // addChartResizeListener() {
-    //   const instance = ResizeListener({
-    //     strategy: "scroll",
-    //     callOnAdd: true,
-    //   });
-
-    //   instance.listenTo(this.$el, () => {
-    //     if (!this.chart) return;
-    //     this.chart.resize();
-    //   });
-    // },
-
     /**
      * 更新echart视图
      */
     updateChartView() {
       if (!this.chart) return;
-
       const fullOption = this.assembleDataToOption();
       this.chart.setOption(fullOption, true);
-    },
-
-    /**
-     * 当窗口缩放时，echart动态调整自身大小
-     */
-    handleWindowResize() {
-      if (!this.chart) return;
-      this.chart.resize();
     },
   },
 };

@@ -126,25 +126,92 @@
       <el-col :span="12">
         <el-card shadow="hover">
           <echarts
-            style="height:300px"
+            style="height:370px"
             :series-data="dataList"
             :extra-option="extraOption"
           ></echarts>
         </el-card>
       </el-col>
       <el-col :span="12">
-        <div class="grid-content bg-purple"></div>
+        <el-card
+          style='background:transparent'
+          shadow="hover"
+          :body-style="{ padding: '0px',position:'relative' }"
+        >
+          <img
+            src="../assets/imgs/sunset.jpg"
+            class="gallery-image"
+          >
+          <el-button
+            class="gallery-btn"
+            round
+            @click="dialogGalleryVisible = true"
+          > Explore gallery
+            <i class="el-icon-right"></i>
+          </el-button>
+        </el-card>
       </el-col>
     </el-row>
+    <!-- 
+    <el-row>
+      <el-col :span="24">
+        <el-card
+          shadow="hover"
+          :body-style="{ padding: '0' }"
+        >
+          <map-chart style="height:1200px"></map-chart>
+        </el-card>
+      </el-col>
+    </el-row> -->
+    <el-dialog
+      custom-class="gallary-dialog"
+      :visible.sync="dialogGalleryVisible"
+      :show-close='false'
+      center
+    >
+      <el-carousel
+        :interval="5000"
+        height="500px"
+        indicator-position="none"
+        arrow="always"
+      >
+        <el-carousel-item
+          v-for="(item,index) in gallaryArr"
+          :key="index"
+        >
+          <img
+            class="dialog-img"
+            :src="item.img"
+          >
+        </el-carousel-item>
+      </el-carousel>
+      <span
+        slot="footer"
+        class="dialog-footer"
+      >
+        <el-button @click="dialogGalleryVisible = false">Cancel</el-button>
+        <el-button
+          type="primary"
+          @click="dialogGalleryVisible = false"
+        >OK</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 import echarts from "@/components/charts/index";
+import mapChart from "@/components/charts/MapChart.vue";
 export default {
-  components: { echarts },
+  name: "dashboard",
+  components: { echarts, mapChart },
   data() {
     return {
+      dialogGalleryVisible: false,
+      gallaryArr: [
+        { img: "src/assets/imgs/sunset.jpg" },
+        { img: "src/assets/imgs/sunset1.jpg" },
+      ],
       contents: [
         {
           icon: "el-icon-user",
@@ -187,6 +254,10 @@ export default {
         },
         {
           title: "今天要完善VUE项目",
+          status: false,
+        },
+        {
+          title: "今天要把衣服洗掉",
           status: false,
         },
       ],
@@ -282,7 +353,7 @@ export default {
 <style lang='less' scoped>
 .user-info {
   align-items: center;
-  padding-bottom: 20px;
+  padding-bottom: 36px;
   margin-bottom: 20px;
   border-bottom: 2px solid #ccc;
   .user-avatar {
@@ -337,6 +408,21 @@ export default {
   width: 100%;
   height: 300px;
 }
+.gallery-image {
+  width: 100%;
+}
+.gallery-btn {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  letter-spacing: 1px;
+  font-size: 24px;
+  background-color: transparent;
+}
+
+.dialog-img {
+  width: 100%;
+}
 
 .el-row {
   margin-bottom: 20px;
@@ -363,5 +449,15 @@ export default {
 .row-bg {
   padding: 10px 0;
   background-color: #f9fafc;
+}
+</style>
+<style lang="less">
+.el-dialog.gallary-dialog {
+  .el-dialog__header {
+    padding: 0 !important;
+  }
+  .el-dialog__body {
+    padding: 20px;
+  }
 }
 </style>

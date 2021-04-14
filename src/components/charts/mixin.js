@@ -1,10 +1,14 @@
 import ResizeListener from "element-resize-detector";
 
-export const mixin = {
+export const chartMixin = {
     data() {
         return {
             chart: null,
         }
+    },
+    mounted() {
+        window.addEventListener("resize", this.handleWindowResize);
+        this.addChartResizeListener();
     },
     methods: {
         /**
@@ -21,5 +25,15 @@ export const mixin = {
                 this.chart.resize();
             });
         },
-    }
+        /**
+         * 当窗口缩放时，echart动态调整自身大小
+         */
+        handleWindowResize() {
+            if (!this.chart) return;
+            this.chart.resize();
+        },
+    },
+    beforeDestroy() {
+        window.removeEventListener("resize", this.handleWindowResize);
+    },
 }

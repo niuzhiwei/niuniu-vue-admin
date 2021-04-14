@@ -3,7 +3,7 @@
     <el-menu
       class="sidebar-el-menu"
       :default-active="onRoutes"
-      :collapse="isCollapse"
+      :collapse="collapse"
       background-color="#324157"
       text-color="#bfcbd9"
       active-text-color="#20a0ff"
@@ -60,10 +60,10 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from "vuex";
 export default {
   data() {
     return {
-      isCollapse: false,
       items: [
         {
           icon: "el-icon-s-home",
@@ -86,7 +86,7 @@ export default {
           title: "表单相关",
           subs: [
             {
-              index: "3-1",
+              index: "form",
               title: "基本表单",
             },
             {
@@ -163,6 +163,7 @@ export default {
     };
   },
   computed: {
+    ...mapGetters(["collapse"]),
     onRoutes() {
       return this.$route.path.replace("/", "");
     },

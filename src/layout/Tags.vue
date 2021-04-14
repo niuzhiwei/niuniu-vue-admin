@@ -1,5 +1,8 @@
 <template>
-  <div class="tags">
+  <div
+    class="tags"
+    v-if="showTags"
+  >
     <ul>
       <li
         class="tags-li"
@@ -13,7 +16,10 @@
         >
           {{item.title}}
         </router-link>
-        <span class="tags-li-icon">
+        <span
+          class="tags-li-icon"
+          @click="closeTag(index)"
+        >
           <i class="el-icon-close"></i>
         </span>
       </li>
@@ -24,14 +30,15 @@
         split-button
         type="primary"
         size="mini"
+        @command="handleTags"
       >
         标签选项
         <el-dropdown-menu
           size="mini"
           slot="dropdown"
         >
-          <el-dropdown-item>关闭其他</el-dropdown-item>
-          <el-dropdown-item>关闭所有</el-dropdown-item>
+          <el-dropdown-item command='other'>关闭其他</el-dropdown-item>
+          <el-dropdown-item command='all'>关闭所有</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
@@ -39,15 +46,99 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from "vuex";
 export default {
-  data() {
-    return {
-      tagsList: [{ path: "/dashboard", title: "系统首页" }],
-    };
+  watch: {
+    $route(val) {
+      this.setTags(val);
+    },
+  },
+  created() {
+    this.setTags(this.$route);
+  },
+  computed: {
+    ...mapGetters(["tagsList"]),
+    showTags() {
+      return this.tagsList.length > 0;
+    },
   },
   methods: {
+    ...mapMutations([
+      "clearAllTags",
+      "pushTags",
+      "shiftTags",
+      "closeOneTag",
+      "clearAllTags",
+      "closeOtherTags",
+    ]),
     isActive(path) {
-      return path === this.$route.path;
+      return path === this.$route.fullPath;
+    },
+    //判断关闭全部标签状态
+    isOnlyHome() {
+      return (
+        this.tagsList.length === 1 && this.tagsList[0].path === "/dashboard"
+      );
+    },
+    returnHome() {},
+    //关闭单个标签
+    closeTag(index) {
+      if (this.isOnlyHome()) {
+        return;
+      }
+      const delItem = this.tagsList[index];
+      this.closeOneTag(index);
+      const item = this.tagsList[index]
+        ? this.tagsList[index]
+        : this.tagsList[index - 1];
+      if (item) {
+        delItem.path === this.$route.fullPath && this.$router.push(item.path);
+      } else {
+        this.$router.push("/");
+      }
+    },
+    //关闭其他标签
+    closeOthers() {
+      const curItem = this.tagsList.filter((item) => {
+        return item.path === this.$route.fullPath;
+      });
+      this.closeOtherTags(curItem);
+    },
+    //关闭全部标签
+    closeAll() {
+      if (this.isOnlyHome()) {
+        return;
+      }
+      this.clearAllTags();
+      this.$router.push("/");
+    },
+    //设置路由标签
+    setTags(route) {
+      const existRoute = this.tagsList.find(
+        (item) => item.path === route.fullPath
+      );
+      if (!existRoute) {
+        if (this.tagsList.length >= 8) {
+          this.shiftTags();
+        }
+        this.pushTags({
+          title: route.meta.title,
+          path: route.fullPath,
+          name: route.matched[1].components.default.name,
+        });
+      }
+    },
+    handleTags(command) {
+      switch (command) {
+        case "other":
+          this.closeOthers();
+          break;
+        case "all":
+          this.closeAll();
+          break;
+        default:
+          break;
+      }
     },
   },
 };

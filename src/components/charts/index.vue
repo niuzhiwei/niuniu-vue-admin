@@ -1,7 +1,7 @@
 <template>
   <div>
     <without-data v-if="isSeriesEmpty" />
-    <Echarts
+    <pie-chart
       v-else
       v-bind="$props"
     />
@@ -11,14 +11,14 @@
 <script>
 import { isEmpty } from "lodash";
 import WithoutData from "../WithoutData";
-import Echarts from "./Echarts";
+import PieChart from "./PieChart";
 export default {
   name: "echarts",
   components: {
     WithoutData,
-    Echarts,
+    PieChart,
   },
-  props: Echarts.props,
+  props: PieChart.props,
   computed: {
     isSeriesEmpty() {
       return isEmpty(this.seriesData);

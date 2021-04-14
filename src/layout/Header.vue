@@ -1,8 +1,18 @@
 <template>
   <div class="header clear">
     <!-- 折叠侧边栏按钮 -->
-    <div class="collapseb-btn">
-      <i class="el-icon-s-unfold"></i>
+    <div
+      class="collapseb-btn"
+      @click="menuCollapse"
+    >
+      <i
+        v-if="collapse"
+        class="el-icon-s-unfold"
+      ></i>
+      <i
+        v-if="!collapse"
+        class="el-icon-s-fold"
+      ></i>
     </div>
 
     <div class="logo">后台管理系统</div>
@@ -50,7 +60,16 @@
 </template>
 
 <script>
-export default {};
+import { mapGetters, mapMutations } from "vuex";
+export default {
+  name: "v-header",
+  computed: {
+    ...mapGetters(["collapse"]),
+  },
+  methods: {
+    ...mapMutations(["menuCollapse"]),
+  },
+};
 </script>
 <style lang='less' scoped>
 .header {

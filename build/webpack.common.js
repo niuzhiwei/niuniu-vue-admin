@@ -25,7 +25,10 @@ module.exports = {
     chunkFilename: 'js/[name].[hash:8].js', //异步加载模块
     publicPath: config.publicPath
   },
-  externals: {},
+  externals: {
+    'AMap': 'AMap',
+    'AMapUI': 'AMapUI'
+  },
   module: {
     noParse: /jquery/,
     rules: [{
