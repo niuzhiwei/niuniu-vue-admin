@@ -164,9 +164,16 @@ export default {
       },
     },
   },
+  watch: {
+    config: {
+      handler: function (val) {
+        this.form = this.renderForm();
+      },
+      deep: true,
+    },
+  },
   data() {
     const { columns = [], data = {} } = this.config || {};
-
     return {
       TYPE: {
         select: {
@@ -216,18 +223,19 @@ export default {
         md: 8,
         xs: 24,
       },
-      form: columns.reduce(
-        (r, c) =>
-          Object.assign(r, {
-            [c.prop]:
-              data && data[c.prop]
-                ? data[c.prop]
-                : c.is == "checkboxGroup"
-                ? []
-                : null,
-          }),
-        {}
-      ),
+      form: this.renderForm(),
+      // form: columns.reduce(
+      //   (r, c) =>
+      //     Object.assign(r, {
+      //       [c.prop]:
+      //         data && data[c.prop]
+      //           ? data[c.prop]
+      //           : c.is == "checkboxGroup"
+      //           ? []
+      //           : null,
+      //     }),
+      //   {}
+      // ),
       rules: columns.reduce(
         (r, c) => ({ ...r, [c.prop]: c.rules ? c.rules : [] }),
         {}
@@ -249,6 +257,21 @@ export default {
     this.reset();
   },
   methods: {
+    renderForm() {
+      const { columns = [], data = {} } = this.config || {};
+      return columns.reduce(
+        (r, c) =>
+          Object.assign(r, {
+            [c.prop]:
+              data && data[c.prop]
+                ? data[c.prop]
+                : c.is == "checkboxGroup"
+                ? []
+                : null,
+          }),
+        {}
+      );
+    },
     componentAttrs(item) {
       const { is = "text", label } = item,
         attrs = Object.fromEntries(

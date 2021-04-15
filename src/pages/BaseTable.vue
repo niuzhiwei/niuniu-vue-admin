@@ -1,6 +1,5 @@
 <template>
   <div>
-    <bread-crumb></bread-crumb>
     <div class="container">
       <div class="handle-box">
         <el-button

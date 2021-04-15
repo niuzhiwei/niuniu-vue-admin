@@ -4,7 +4,7 @@
       :data=cfg.data
       style='width:100%'
       v-on="cfg.on"
-      v-bind="attrs"
+      v-bind="{...attrs,...$attrs}"
       v-loading='loading'
     >
       <el-table-column

@@ -107,7 +107,7 @@ export default {
       },
     };
   },
-  created() {
+  mounted() {
     const data = {
       name: "橙子",
       certificateId: "068001",

@@ -12,24 +12,41 @@ export const constantRouterMap = [{
     path: '/',
     component: () => import('../layout/Home.vue'),
     children: [{
-      path: '/dashboard',
-      component: () => import('../pages/Dashboard.vue'),
-      meta: {
-        title: '系统首页'
+        path: '/dashboard',
+        component: () => import('../pages/Dashboard.vue'),
+        meta: {
+          title: '系统首页',
+          icon: 'el-icon-s-home'
+        }
+      }, {
+        path: '/table',
+        component: () => import('../pages/BaseTable.vue'),
+        meta: {
+          title: '基础表格',
+          icon: 'el-icon-table-lamp'
+        }
+      }, {
+        path: '/tabs',
+        component: () => import('../pages/Tabs.vue'),
+        meta: {
+          title: 'tab选项卡',
+          icon: 'el-icon-collection-tag'
+        }
+      },
+      {
+        path: '/form',
+        component: () => import('../pages/BaseForm.vue'),
+        meta: {
+          title: '基本表单',
+        }
+      }, {
+        path: '/editor',
+        component: () => import('../pages/VueEditor.vue'),
+        meta: {
+          title: '富文本编辑器'
+        }
       }
-    }, {
-      path: '/table',
-      component: () => import('../pages/BaseTable.vue'),
-      meta: {
-        title: '基础表格'
-      }
-    }, {
-      path: '/form',
-      component: () => import('../pages/BaseForm.vue'),
-      meta: {
-        title: '基本表单'
-      }
-    }]
+    ]
   }
 ]
 

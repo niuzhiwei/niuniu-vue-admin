@@ -8,6 +8,7 @@
     >
       <v-tags></v-tags>
       <div class="content">
+        <bread-crumb></bread-crumb>
         <transition
           name="move"
           mode="out-in"
@@ -27,8 +28,9 @@ import vHeader from "./Header";
 import vSidebar from "./Sidebar";
 import vTags from "./Tags";
 import { mapGetters } from "vuex";
+import breadCrumb from "@/components/breadCrumb";
 export default {
-  components: { vHeader, vSidebar, vTags },
+  components: { vHeader, vSidebar, vTags, breadCrumb },
   computed: {
     ...mapGetters(["tagsList", "collapse"]),
     activeRoutes() {
