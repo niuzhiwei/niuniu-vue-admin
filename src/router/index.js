@@ -23,6 +23,12 @@ export const constantRouterMap = [{
       meta: {
         title: '基础表格'
       }
+    }, {
+      path: '/form',
+      component: () => import('../pages/BaseForm.vue'),
+      meta: {
+        title: '基本表单'
+      }
     }]
   }
 ]

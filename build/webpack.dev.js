@@ -41,6 +41,12 @@ const devConfig = merge(webpackConfig, {
     open: config.dev.autoOpen,
     proxy: config.dev.proxyTable,
     historyApiFallback: true,
+    proxy: {
+      '/api': {
+        target: 'https://www.fastmock.site/mock/84374715c999223c706a336d0d72dea5',
+        changeOrigin: true,
+      }
+    },
     watchOptions: {
       // 不监听的文件或文件夹，支持正则匹配
       ignored: /node_modules/,

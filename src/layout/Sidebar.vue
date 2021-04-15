@@ -115,7 +115,7 @@ export default {
           title: "自定义图标",
         },
         {
-          icon: "el-icon-pie-chart",
+          icon: "el-icon-map-location",
           index: "charts",
           title: "schart图表",
         },

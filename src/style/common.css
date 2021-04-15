@@ -113,6 +113,9 @@ body {
 .mgb20 {
   margin-bottom: 20px;
 }
+.mr10 {
+  margin-right: 10px !important;
+}
 .content-box {
   position: absolute;
   left: 250px;
@@ -132,4 +135,22 @@ body {
 }
 .content-collapse {
   left: 65px;
+}
+.crumbs {
+  margin: 10px 0;
+}
+.container {
+  padding: 30px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+.table-header {
+  background-color: #ccc;
+}
+.form-box {
+  width: 600px;
+}
+.form-box .line {
+  text-align: center;
 }
