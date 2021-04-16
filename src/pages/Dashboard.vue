@@ -153,16 +153,6 @@
       </el-col>
     </el-row>
 
-    <!-- <el-row>
-      <el-col :span="24">
-        <el-card
-          shadow="hover"
-          :body-style="{ padding: '0' }"
-        >
-          <map-chart style="height:1200px"></map-chart>
-        </el-card>
-      </el-col>
-    </el-row> -->
     <el-dialog
       custom-class="gallary-dialog"
       :visible.sync="dialogGalleryVisible"
@@ -201,10 +191,9 @@
 
 <script>
 import echarts from "@/components/charts/index";
-import mapChart from "@/components/charts/MapChart.vue";
 export default {
   name: "dashboard",
-  components: { echarts, mapChart },
+  components: { echarts },
   data() {
     return {
       dialogGalleryVisible: false,

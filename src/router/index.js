@@ -45,6 +45,20 @@ export const constantRouterMap = [{
         meta: {
           title: '富文本编辑器'
         }
+      },
+      {
+        path: '/upload',
+        component: () => import('../pages/Upload.vue'),
+        meta: {
+          title: '文件上传'
+        }
+      }, {
+        path: '/map',
+        component: () => import('../pages/Map.vue'),
+        meta: {
+          title: '地图图表',
+          icon: 'el-icon-map-location'
+        }
       }
     ]
   }

@@ -97,10 +97,6 @@ export default {
                   index: "editor",
                   title: "富文本编辑器",
                 },
-                {
-                  index: "markdown",
-                  title: "markdown编辑器",
-                },
               ],
             },
             {
@@ -116,8 +112,8 @@ export default {
         },
         {
           icon: "el-icon-map-location",
-          index: "charts",
-          title: "schart图表",
+          index: "map",
+          title: "地图图表",
         },
         {
           icon: "el-icon-rank",
