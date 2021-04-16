@@ -3,6 +3,7 @@ import App from './App'
 import router from "./router"
 import store from './store'
 import filters from './utils/filters'
+import './utils/directives'
 import '@/plugins';
 
 //注册全局过滤器

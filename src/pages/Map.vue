@@ -5,7 +5,7 @@
       shadow="hover"
       :body-style="{ padding: '0' }"
     >
-      <map-chart style="height:1200px"></map-chart>
+      <map-chart style="height:1000px"></map-chart>
     </el-card>
   </div>
 

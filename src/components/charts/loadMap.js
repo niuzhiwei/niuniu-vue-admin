@@ -6,7 +6,7 @@ export default function MapUILoader(key) {
             let script = document.createElement('script')
             script.type = 'text/javascript'
             // script.async = true
-            script.src = 'https://webapi.amap.com/maps?v=1.3&callback=initAMap&key=' + key
+            script.src = 'https://webapi.amap.com/maps?v=1.3&callback=initAMap&plugin=AMap.DistrictSearch&key=' + key
             script.onerror = reject
             document.head.appendChild(script)
         }
@@ -33,8 +33,6 @@ export default function MapUILoader(key) {
     })
 
     return Promise.all([map, mpUI]).then(res => {
-        console.log(res[0])
-        console.log(res[1])
         return res[1]
     }).catch(e => {
         console.error(e)

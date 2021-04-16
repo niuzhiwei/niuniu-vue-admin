@@ -106,11 +106,6 @@ export default {
           ],
         },
         {
-          icon: "el-icon-picture-outline",
-          index: "icon",
-          title: "自定义图标",
-        },
-        {
           icon: "el-icon-map-location",
           index: "map",
           title: "地图图表",
@@ -122,7 +117,7 @@ export default {
           subs: [
             {
               index: "drag",
-              title: "拖拽列表",
+              title: "拖拽组件",
             },
             {
               index: "dialog",
@@ -149,11 +144,6 @@ export default {
               title: "404页面",
             },
           ],
-        },
-        {
-          icon: "el-icon-money",
-          index: "/donate",
-          title: "支持作者",
         },
       ],
     };

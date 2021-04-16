@@ -59,8 +59,36 @@ export const constantRouterMap = [{
           title: '地图图表',
           icon: 'el-icon-map-location'
         }
+      }, {
+        path: '/drag',
+        component: () => import('../pages/DragList.vue'),
+        meta: {
+          title: '拖拽组件'
+        }
+      },
+      {
+        path: '/dialog',
+        component: () => import('../pages/DragDialog.vue'),
+        meta: {
+          title: '拖拽弹框'
+        }
+      }, {
+        path: '/404',
+        component: () => import('../pages/404.vue'),
+        meta: {
+          title: '404'
+        }
       }
     ]
+  }, {
+    path: '/login',
+    component: () => import('../pages/Login.vue'),
+    meta: {
+      title: '登录'
+    }
+  }, {
+    path: '*',
+    redirect: '/404'
   }
 ]
 

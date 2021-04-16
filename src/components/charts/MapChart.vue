@@ -49,28 +49,26 @@ export default {
   },
   methods: {
     getGeoJson(adcode) {
-      if (window.AMapUI) {
-        console.log(window.AMapUI);
-      }
-      MapLoader().then((AMapUI) => {
-        console.log(AMapUI);
-        AMapUI.loadUI(["geo/DistrictExplorer"], (DistrictExplorer) => {
-          var districtExplorer = new DistrictExplorer();
-          districtExplorer.loadAreaNode(adcode, (error, areaNode) => {
-            if (error) {
-              console.error(error);
-              return;
-            }
-            let Json = areaNode.getSubFeatures();
-            if (Json.length > 0) {
-              this.geoJson.features = Json;
-            } else if (Json.length === 0) {
-              this.getJson.features = this.getJson.features.filter(
-                (item) => item.properties.adcode == adcode
-              );
-              if (this.geoJson.features.length === 0) return;
-            }
-            this.getMapData();
+      this.$nextTick(() => {
+        MapLoader().then((AMapUI) => {
+          AMapUI.loadUI(["geo/DistrictExplorer"], (DistrictExplorer) => {
+            var districtExplorer = new DistrictExplorer();
+            districtExplorer.loadAreaNode(adcode, (error, areaNode) => {
+              if (error) {
+                console.error(error);
+                return;
+              }
+              let Json = areaNode.getSubFeatures();
+              if (Json.length > 0) {
+                this.geoJson.features = Json;
+              } else if (Json.length === 0) {
+                this.getJson.features = this.getJson.features.filter(
+                  (item) => item.properties.adcode == adcode
+                );
+                if (this.geoJson.features.length === 0) return;
+              }
+              this.getMapData();
+            });
           });
         });
       });
@@ -233,6 +231,8 @@ export default {
               name: "top5",
               type: "effectScatter",
               data: mapData,
+              zlevel: 1,
+              animation: false,
               coordinateSystem: "geo",
               //这里可以设置点的大小
               symbolSize: function (val) {
