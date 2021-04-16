@@ -1,7 +1,4 @@
 import axios from 'axios';
-import {
-    Message
-} from 'element-ui';
 const request = axios.create({
     baseURL: '/api',
     // baseURL: 'https://www.fastmock.site/mock/84374715c999223c706a336d0d72dea5/api',
@@ -13,12 +10,12 @@ request.interceptors.response.use((response) => {
     if (res.status === 0) {
         return res.data
     } else {
-        Message.warning(res.msg)
+        ELEMENT.MessageBox.warning(res.msg)
         return Promise.reject(res)
     }
 }, (error) => {
     const res = error.response
-    Message.error(res.data.message)
+    ELEMENT.MessageBox.error(res.data.message)
     return Promise.reject(error);
 })
 

@@ -1,21 +1,6 @@
 <template>
   <div>
     <div class="container">
-      <!-- <el-tabs type="border-card">
-        <el-tab-pane>
-          <span slot="label"><i class="el-icon-phone-outline"></i> 未读消息</span>
-          我的行程
-        </el-tab-pane>
-        <el-tab-pane>
-          <span slot="label"><i class="el-icon-star-off"></i> 已读消息</span>
-          我的行程
-        </el-tab-pane>
-        <el-tab-pane>
-          <span slot="label"><i class="el-icon-delete"></i> 垃圾箱</span>
-          我的行程
-        </el-tab-pane>
-      </el-tabs> -->
-
       <el-tabs
         v-model="activeName"
         type="border-card"

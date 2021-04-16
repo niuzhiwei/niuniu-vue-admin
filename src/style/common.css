@@ -34,7 +34,6 @@ figcaption {
   font-style: normal;
   text-decoration: none;
   border: none;
-  font-family: "Microsoft Yahei", sans-serif;
   -webkit-tap-highlight-color: transparent;
   -webkit-font-smoothing: antialiased;
 }
@@ -153,4 +152,8 @@ body {
 }
 .form-box .line {
   text-align: center;
+}
+.plugins-tips {
+  padding: 20px 10px;
+  margin-bottom: 20px;
 }

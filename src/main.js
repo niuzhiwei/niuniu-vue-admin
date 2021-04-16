@@ -9,9 +9,6 @@ import '@/plugins';
 Object.keys(filters).forEach(key => {
     Vue.filter(key, filters[key])
 })
-import('element-ui/lib/theme-chalk/index.css')
-import ElementUI from 'element-ui'
-Vue.use(ElementUI);
 
 new Vue({
     router,

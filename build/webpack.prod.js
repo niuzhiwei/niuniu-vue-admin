@@ -85,13 +85,13 @@ const prodConfig = merge(webpackConfig, {
     //开启Scope hosting
     new ModuleConcatenationPlugin(),
     //vue使用cdn
-    new HtmlWebpackExternalsPlugin({
-      externals:[{
-        module:'vue',
-        entry:'https://cdn.bootcss.com/vue/2.6.10/vue.min.js',
-        global:'Vue'
-      }]
-    }),
+    // new HtmlWebpackExternalsPlugin({
+    //   externals:[{
+    //     module:'vue',
+    //     entry:'https://cdn.bootcss.com/vue/2.6.10/vue.min.js',
+    //     global:'Vue'
+    //   }]
+    // }),
   ],
   optimization: {
     //压缩css

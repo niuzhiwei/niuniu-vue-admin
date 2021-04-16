@@ -27,7 +27,9 @@ module.exports = {
   },
   externals: {
     'AMap': 'AMap',
-    'AMapUI': 'AMapUI'
+    'AMapUI': 'AMapUI',
+    'vue': 'Vue',
+    'element-ui': 'ELEMENT',
   },
   module: {
     noParse: /jquery/,

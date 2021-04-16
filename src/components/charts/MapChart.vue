@@ -24,6 +24,7 @@
 
 <script>
 import { chartMixin } from "./mixin";
+import MapLoader from "./loadMap";
 
 export default {
   name: "dotMap",
@@ -48,26 +49,50 @@ export default {
   },
   methods: {
     getGeoJson(adcode) {
-      let that = this;
-      AMapUI.loadUI(["geo/DistrictExplorer"], (DistrictExplorer) => {
-        var districtExplorer = new DistrictExplorer();
-        districtExplorer.loadAreaNode(adcode, (error, areaNode) => {
-          if (error) {
-            console.error(error);
-            return;
-          }
-          let Json = areaNode.getSubFeatures();
-          if (Json.length > 0) {
-            this.geoJson.features = Json;
-          } else if (Json.length === 0) {
-            this.getJson.features = this.getJson.features.filter(
-              (item) => item.properties.adcode == adcode
-            );
-            if (this.geoJson.features.length === 0) return;
-          }
-          this.getMapData();
+      if (window.AMapUI) {
+        console.log(window.AMapUI);
+      }
+      MapLoader().then((AMapUI) => {
+        console.log(AMapUI);
+        AMapUI.loadUI(["geo/DistrictExplorer"], (DistrictExplorer) => {
+          var districtExplorer = new DistrictExplorer();
+          districtExplorer.loadAreaNode(adcode, (error, areaNode) => {
+            if (error) {
+              console.error(error);
+              return;
+            }
+            let Json = areaNode.getSubFeatures();
+            if (Json.length > 0) {
+              this.geoJson.features = Json;
+            } else if (Json.length === 0) {
+              this.getJson.features = this.getJson.features.filter(
+                (item) => item.properties.adcode == adcode
+              );
+              if (this.geoJson.features.length === 0) return;
+            }
+            this.getMapData();
+          });
         });
       });
+      // AMapUI.loadUI(["geo/DistrictExplorer"], (DistrictExplorer) => {
+      //   var districtExplorer = new DistrictExplorer();
+      //   districtExplorer.loadAreaNode(adcode, (error, areaNode) => {
+      //     if (error) {
+      //       console.error(error);
+      //       return;
+      //     }
+      //     let Json = areaNode.getSubFeatures();
+      //     if (Json.length > 0) {
+      //       this.geoJson.features = Json;
+      //     } else if (Json.length === 0) {
+      //       this.getJson.features = this.getJson.features.filter(
+      //         (item) => item.properties.adcode == adcode
+      //       );
+      //       if (this.geoJson.features.length === 0) return;
+      //     }
+      //     this.getMapData();
+      //   });
+      // });
     },
     //获取数据
     getMapData() {
