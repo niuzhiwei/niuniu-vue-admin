@@ -14,6 +14,7 @@ export const constantRouterMap = [{
     path: '/login',
     name: 'login',
     component: () => import('../pages/Login.vue'),
+    hidden: true,
     meta: {
       title: '登录'
     }
@@ -24,7 +25,8 @@ export const constantRouterMap = [{
     component: () => import('../pages/404.vue'),
     meta: {
       title: '404'
-    }
+    },
+    hidden: true
   },
   {
     path: '/',
@@ -37,6 +39,7 @@ export const constantRouterMap = [{
     noDropdown: true,
     children: [{
       path: 'dashboard',
+      name: 'dashboard',
       meta: {
         title: '系统首页',
         icon: 'el-icon-s-home',
@@ -57,6 +60,7 @@ export const asyncRouterMap = [{
     noDropdown: true,
     children: [{
       path: 'table',
+      name: 'baseTable',
       meta: {
         title: '基础表格',
         icon: 'el-icon-table-lamp',
@@ -74,6 +78,7 @@ export const asyncRouterMap = [{
     noDropdown: true,
     children: [{
       path: 'tabs',
+      name: 'tabs',
       meta: {
         title: 'tab选项卡',
         icon: 'el-icon-collection-tag',
@@ -87,16 +92,19 @@ export const asyncRouterMap = [{
     component: Home,
     meta: {
       title: '表单相关',
+      icon: 'el-icon-tickets'
     },
     redirect: '/form',
     children: [{
         path: 'form',
+        name: 'baseform',
         meta: {
           title: '基本表单',
         },
         component: () => import('../pages/BaseForm.vue')
       }, {
         path: 'upload',
+        name: 'upload',
         meta: {
           title: '文件上传'
         },
@@ -104,8 +112,10 @@ export const asyncRouterMap = [{
       },
       {
         path: '/',
+        name: 'thirdmenu',
         meta: {
-          title: '三级菜单'
+          title: '三级菜单',
+          hasChildren: true
         },
         component: {
           render: (e) => e('router-view')
@@ -113,6 +123,7 @@ export const asyncRouterMap = [{
         redirect: '/editor',
         children: [{
           path: 'editor',
+          name: 'editor',
           meta: {
             title: '富文本编辑器'
           },
@@ -131,6 +142,7 @@ export const asyncRouterMap = [{
     },
     noDropdown: true,
     children: [{
+      name: 'map',
       path: 'map',
       meta: {
         title: '地图图表',
@@ -143,16 +155,19 @@ export const asyncRouterMap = [{
     name: 'drag',
     component: Home,
     meta: {
-      title: '拖拽组件'
+      title: '拖拽组件',
+      icon: 'el-icon-thumb'
     },
     children: [{
       path: 'drag',
+      name: 'dragcomponent',
       meta: {
         title: '拖拽组件'
       },
       component: () => import('../pages/DragList.vue')
     }, {
       path: 'dialog',
+      name: 'dragdialog',
       meta: {
         title: '拖拽弹框'
       },
@@ -168,7 +183,7 @@ export const asyncRouterMap = [{
       roles: ['admin', 'editor']
     },
     children: [{
-      path: '/permissionpage',
+      path: 'permissionpage',
       name: 'permissionpage',
       meta: {
         title: '权限页面',
@@ -176,7 +191,7 @@ export const asyncRouterMap = [{
       },
       component: () => import('../pages/PermissionPage.vue')
     }, {
-      path: '/permissiondirective',
+      path: 'permissiondirective',
       name: 'permissiondirective',
       meta: {
         title: '权限按钮',
@@ -189,21 +204,23 @@ export const asyncRouterMap = [{
     name: 'error',
     component: Home,
     meta: {
-      title: '404'
+      title: '404',
+      icon: 'el-icon-warning-outline'
     },
     children: [{
       path: '404',
+      name: '404',
       meta: {
         title: '404'
       },
       component: () => import('../pages/404.vue')
     }]
   },
-  {
-    path: '*',
-    redirect: '/404',
-    hidden: true
-  }
+  // {
+  //   path: '*',
+  //   redirect: '/404',
+  //   hidden: true
+  // }
 ]
 
 //注册路由

@@ -39,7 +39,7 @@
 
         <!-- 用户头像   -->
         <div class="user-avatar">
-          <img src="../assets/imgs/pig.png">
+          <img :src="avatar">
         </div>
         <!-- 用户名下拉菜单 -->
         <el-dropdown
@@ -47,12 +47,12 @@
           trigger="click"
         >
           <span class="el-dropdown-link">
-            牛牛
+            {{name}}
             <i class="el-icon-caret-bottom"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
             <a
-              href="https://github.com/lin-xin/vue-manage-system"
+              href="https://github.com/niuzhiwei"
               target="_blank"
             >
               <el-dropdown-item>项目仓库</el-dropdown-item>
@@ -79,7 +79,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["collapse"]),
+    ...mapGetters(["collapse", "name", "avatar"]),
   },
   methods: {
     ...mapMutations(["menuCollapse"]),
@@ -131,7 +131,7 @@ export default {
           display: block;
           width: 42px;
           height: 42px;
-          border: 100%;
+          border-radius: 50%;
         }
       }
       .user-name {

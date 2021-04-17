@@ -14,7 +14,7 @@
           :to="item.path"
           class="tags-li-title"
         >
-          {{item.title}}
+          {{$t(`commons.${item.title}`)}}
         </router-link>
         <span
           class="tags-li-icon"
@@ -121,8 +121,9 @@ export default {
         if (this.tagsList.length >= 8) {
           this.shiftTags();
         }
+        console.log(route);
         this.pushTags({
-          title: route.meta.title,
+          title: route.name,
           path: route.fullPath,
           name: route.matched[1].components.default.name,
         });
