@@ -140,6 +140,21 @@ export default {
             },
           ],
         },
+        {
+          icon: "el-icon-setting",
+          index: "8",
+          title: "权限设置",
+          subs: [
+            {
+              index: "permissionpage",
+              title: "权限页面",
+            },
+            {
+              index: "permissiondirective",
+              title: "权限按钮",
+            },
+          ],
+        },
       ],
     };
   },

@@ -40,7 +40,7 @@ const devConfig = merge(webpackConfig, {
     publicPath: '/', //一定要加
     open: config.dev.autoOpen,
     proxy: config.dev.proxyTable,
-    historyApiFallback: true,
+    // historyApiFallback: true,
     proxy: {
       '/api': {
         target: 'https://www.fastmock.site/mock/84374715c999223c706a336d0d72dea5',

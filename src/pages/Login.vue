@@ -42,13 +42,15 @@
 </template>
 
 <script>
+import { login } from "@/api";
+import { setToken, getToken } from "@/utils/auth";
 export default {
   name: "login",
   data() {
     return {
       param: {
-        username: "",
-        password: "",
+        username: "admin",
+        password: "123456",
       },
       rules: {
         username: [
@@ -59,7 +61,23 @@ export default {
     };
   },
   methods: {
-    submitForm() {},
+    submitForm() {
+      login(this.param)
+        .then((res) => {
+          const { userInfo, verifySuccess } = res;
+          if (verifySuccess) {
+            this.$message.success("登录成功");
+            setToken("Token", userInfo.token);
+            this.$store.commit("setToken");
+            this.$router.push({ path: "/" });
+          } else {
+            this.$message.error("登录失败");
+          }
+        })
+        .catch((e) => {
+          console.error(e.message);
+        });
+    },
   },
 };
 </script>
