@@ -4,7 +4,7 @@
       class="sidebar-el-menu"
       :default-active="onRoutes"
       :collapse="collapse"
-      background-color="#324157"
+      background-color="#1c2b36"
       text-color="#bfcbd9"
       active-text-color="#20a0ff"
       unique-opened
@@ -68,7 +68,7 @@ export default {
         {
           icon: "el-icon-s-home",
           index: "dashboard",
-          title: "系统首页",
+          title: `${this.$t("commons.dashboard")}`,
         },
         {
           icon: "el-icon-table-lamp",

@@ -5,6 +5,7 @@ import store from './store'
 import filters from './utils/filters'
 import './utils/directives'
 import '@/plugins';
+import i18n from './lang/index'
 
 //注册全局过滤器
 Object.keys(filters).forEach(key => {
@@ -14,5 +15,6 @@ Object.keys(filters).forEach(key => {
 new Vue({
     router,
     store,
+    i18n,
     render: h => h(App)
 }).$mount('#app')

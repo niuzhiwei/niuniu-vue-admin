@@ -26,6 +26,16 @@
         <div class="btn-bell">
           <i class="el-icon-bell"></i>
         </div>
+        <!-- 国际化切换 -->
+        <el-dropdown @command="handleLang">
+          <span class="el-dropdown-link">
+            {{chooseLang}}<i class="el-icon-arrow-down el-icon--right"></i>
+          </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item command='zh'>中文</el-dropdown-item>
+            <el-dropdown-item command='en'>英文</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
 
         <!-- 用户头像   -->
         <div class="user-avatar">
@@ -60,13 +70,24 @@
 
 <script>
 import { mapGetters, mapMutations } from "vuex";
+import { setToken } from "@/utils/auth";
 export default {
   name: "v-header",
+  data() {
+    return {
+      chooseLang: "英文",
+    };
+  },
   computed: {
     ...mapGetters(["collapse"]),
   },
   methods: {
     ...mapMutations(["menuCollapse"]),
+    handleLang(type) {
+      setToken("lang", type);
+      this.$i18n.locale = type;
+      type === "en" ? (this.chooseLang = "英文") : (this.chooseLang = "中文");
+    },
   },
 };
 </script>
