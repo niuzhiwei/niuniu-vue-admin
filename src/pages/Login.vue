@@ -58,7 +58,21 @@ export default {
         ],
         password: [{ required: true, message: "请输入密码", trigger: "blur" }],
       },
+      redirect: undefined,
+      otherQuery: {},
     };
+  },
+  watch: {
+    $route: {
+      handler: function (route) {
+        const query = route.query;
+        if (query) {
+          this.redirect = query.redirect;
+          this.otherQuery = this.getOtherQuery(query);
+        }
+      },
+      immediate: true,
+    },
   },
   methods: {
     submitForm() {
@@ -67,9 +81,12 @@ export default {
           const { userInfo, verifySuccess } = res;
           if (verifySuccess) {
             this.$message.success("登录成功");
+            this.$store.commit("setToken", userInfo.token);
             setToken("Token", userInfo.token);
-            this.$store.commit("setToken");
-            this.$router.push({ path: "/" });
+            this.$router.push({
+              path: this.redirect || "/",
+              query: this.otherQuery,
+            });
           } else {
             this.$message.error("登录失败");
           }
@@ -77,6 +94,14 @@ export default {
         .catch((e) => {
           console.error(e.message);
         });
+    },
+    getOtherQuery(query) {
+      return Object.keys(query).reduce((acc, cur) => {
+        if (cur !== "redirect") {
+          acc[cur] = query[cur];
+        }
+        return acc;
+      }, {});
     },
   },
 };

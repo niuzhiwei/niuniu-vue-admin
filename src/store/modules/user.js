@@ -32,8 +32,8 @@ const user = {
         setAvatar: (state, avatar) => {
             state.avatar = avatar
         },
-        setToken: (state) => {
-            state.token = getToken('Token')
+        setToken: (state, token) => {
+            state.token = token
         },
         setBrowserTitle: (state, payload) => {
             state.browserTitle = payload.browserTitle

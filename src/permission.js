@@ -39,7 +39,6 @@ router.beforeEach((to, from, next) => {
             })
             Nprogress.done()
         } else {
-            console.log(store.getters.roles)
             //用户成功登录以后，每次点击路由都进行角色判断
             if (store.getters.roles.length === 0) {
                 getUserInfo().then(res => {
@@ -52,7 +51,6 @@ router.beforeEach((to, from, next) => {
                     store.dispatch('generateRoutes', {
                         "roles": userInfo.roles
                     }).then(() => {
-                        console.log(to)
                         router.addRoutes(store.getters.addRouters) //动态合并路由
                         next({
                             ...to,
@@ -62,12 +60,9 @@ router.beforeEach((to, from, next) => {
                 }).catch(err => {
                     store.dispatch('LogOut')
                     ELEMENT.Message.error('验证失败，请重新登录')
-                    next({
-                        path: '/'
-                    })
+                    next(`/login?redirect=${to.path}`)
                 })
             } else {
-                console.log(to)
                 if (hasPermission(store.getters.roles, to.meta.roles)) {
                     next()
                 } else {
@@ -82,12 +77,10 @@ router.beforeEach((to, from, next) => {
             }
         }
     } else {
-        console.log(to.path)
-        console.log(whiteList.includes(to.path))
         if (whiteList.includes(to.path)) {
             next()
         } else {
-            next('/login')
+            next(`/login?redirect=${to.path}`)
             Nprogress.done()
         }
     }
