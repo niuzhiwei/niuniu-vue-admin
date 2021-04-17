@@ -126,11 +126,6 @@ export default {
           ],
         },
         {
-          icon: "el-icon-basketball",
-          index: "i18n",
-          title: "国际化功能",
-        },
-        {
           icon: "el-icon-error",
           index: "7",
           title: "错误处理",
