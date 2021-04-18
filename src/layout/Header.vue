@@ -45,6 +45,7 @@
         <el-dropdown
           class="user-name"
           trigger="click"
+          @command="handlerLogout"
         >
           <span class="el-dropdown-link">
             {{name}}
@@ -69,7 +70,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from "vuex";
+import { mapGetters, mapMutations, mapActions } from "vuex";
 import { setToken } from "@/utils/auth";
 export default {
   name: "v-header",
@@ -83,10 +84,16 @@ export default {
   },
   methods: {
     ...mapMutations(["menuCollapse"]),
+    ...mapActions(["LogOut"]),
     handleLang(type) {
       setToken("lang", type);
       this.$i18n.locale = type;
       type === "en" ? (this.chooseLang = "英文") : (this.chooseLang = "中文");
+    },
+    handlerLogout(type) {
+      if (type === "loginout") {
+        this.LogOut()
+      }
     },
   },
 };

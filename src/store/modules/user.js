@@ -46,6 +46,7 @@ const user = {
         }) {
             commit('setRoles', []);
             removeToken('Token')
+            location.reload()
         },
     }
 }
