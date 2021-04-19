@@ -213,9 +213,6 @@ export default {
       ],
     };
   },
-  mounted() {
-    console.log(this.permission_routers);
-  },
   computed: {
     ...mapGetters(["collapse", "permission_routers"]),
     onRoutes() {

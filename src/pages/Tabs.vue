@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 import renderTable from "@/components/rendertable/rendertable.vue";
 export default {
   name: "tabs",
@@ -65,24 +66,24 @@ export default {
       msg: {
         unread: [
           {
-            date: "2018-04-19 20:00:00",
+            date: "2021-04-19 20:00:00",
             title: "【系统通知】该系统将于今晚凌晨2点到5点进行升级维护",
           },
           {
-            date: "2018-04-19 21:00:00",
-            title: "今晚12点整发大红包，先到先得",
+            date: "2021-04-19 21:00:00",
+            title: "今晚12点整发福利，先到先得",
           },
         ],
         read: [
           {
-            date: "2018-04-19 20:00:00",
+            date: "2021-04-22 20:00:00",
             title: "【系统通知】该系统将于今晚凌晨2点到5点进行升级维护",
           },
         ],
         recycle: [
           {
-            date: "2018-04-19 20:00:00",
-            title: "【系统通知】该系统将于今晚凌晨2点到5点进行升级维护",
+            date: "2021-04-20 20:00:00",
+            title: "【系统通知】系统升级完成",
           },
         ],
       },
@@ -92,6 +93,9 @@ export default {
         { icon: "el-icon-delete", title: "垃圾箱", label: "recycle" },
       ],
     };
+  },
+  mounted() {
+    this.changeMsg(this.msg.unread.length);
   },
   computed: {
     config() {
@@ -105,6 +109,7 @@ export default {
     },
   },
   methods: {
+    ...mapMutations(["changeMsg"]),
     getActions() {
       return {
         prop: "action",
@@ -116,6 +121,7 @@ export default {
             click: (data, index) => {
               const item = this.msg[this.activeName].splice(index, 1);
               this.msg.read = item.concat(this.msg.read);
+              this.changeMsg(this.msg.unread.length);
             },
             filter: () => this.activeName === "unread",
           },
@@ -132,6 +138,7 @@ export default {
             click: (data, index) => {
               const item = this.msg[this.activeName].splice(index, 1);
               this.msg.read = item.concat(this.msg.read);
+              this.changeMsg(this.msg.unread.length);
             },
             filter: () => this.activeName === "recycle",
           },

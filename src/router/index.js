@@ -216,11 +216,11 @@ export const asyncRouterMap = [{
       component: () => import('../pages/404.vue')
     }]
   },
-  // {
-  //   path: '*',
-  //   redirect: '/404',
-  //   hidden: true
-  // }
+  {
+    path: '*',
+    redirect: '/404',
+    hidden: true
+  }
 ]
 
 //注册路由

@@ -121,7 +121,6 @@ export default {
         if (this.tagsList.length >= 8) {
           this.shiftTags();
         }
-        console.log(route);
         this.pushTags({
           title: route.name,
           path: route.fullPath,

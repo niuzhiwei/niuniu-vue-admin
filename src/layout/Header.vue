@@ -24,7 +24,15 @@
         </div>
         <!-- 消息中心   -->
         <div class="btn-bell">
-          <i class="el-icon-bell"></i>
+          <el-badge
+            :value="message"
+            class="item"
+          >
+            <i
+              class="el-icon-bell"
+              @click="$router.push('/tabs')"
+            ></i>
+          </el-badge>
         </div>
         <!-- 国际化切换 -->
         <el-dropdown @command="handleLang">
@@ -80,7 +88,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["collapse", "name", "avatar"]),
+    ...mapGetters(["collapse", "name", "avatar",'message']),
   },
   methods: {
     ...mapMutations(["menuCollapse"]),
@@ -92,7 +100,7 @@ export default {
     },
     handlerLogout(type) {
       if (type === "loginout") {
-        this.LogOut()
+        this.LogOut();
       }
     },
   },

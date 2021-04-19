@@ -4,8 +4,8 @@ import {
     removeToken
 } from '@/utils/auth'
 import {
-    resolve
-} from 'core-js/fn/promise'
+    getUserInfo
+} from '@/api'
 
 const user = {
     state: {
@@ -48,6 +48,24 @@ const user = {
             removeToken('Token')
             location.reload()
         },
+        changeRoles({
+            commit
+        }, role) {
+            return new Promise(resolve => {
+                const token = role === 'admin' ? 'e10adc3949ba59abbe56e057f20f883e' : 'e10adc3949ba59abb3gse057f20f883e';
+                commit('setToken', token)
+                setToken('Token', token)
+                getUserInfo().then(res => {
+                    const {
+                        userInfo
+                    } = res;
+                    commit('setRoles', userInfo.roles);
+                    commit('setName', userInfo.username);
+                    commit('setAvatar', userInfo.avatar);
+                    resolve()
+                })
+            })
+        }
     }
 }
 

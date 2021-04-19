@@ -1,5 +1,22 @@
 import Vue from 'vue';
-
+import store from '@/store'
+//权限按钮
+Vue.directive('permission', {
+    inserted(el, binding, vnode, oldVnode) {
+        const {
+            value
+        } = binding;
+        const roles = store.getters && store.getters.roles
+        if (value && Array.isArray(value) && value.length > 0) {
+            const hasPermission = roles.some(role => value.includes(role))
+            if (!hasPermission) {
+                el.parentNode && el.parentNode.removeChild(el)
+            }
+        } else {
+            throw new Error(`Need Roles! Like v-permission="['admin','editor]"`)
+        }
+    }
+})
 // v-dialogDrag: 弹窗拖拽属性
 Vue.directive('dialogDrag', {
     bind(el, binding, vnode, oldVnode) {

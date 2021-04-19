@@ -9,10 +9,10 @@
           <div class="user-info rflex">
             <img
               class="user-avatar"
-              src="../assets/imgs/pig.png"
+              :src="avatar"
             >
             <div class="user-info-list">
-              <div class="user-info-name">牛牛</div>
+              <div class="user-info-name">{{name}}</div>
               <div>Admin</div>
             </div>
           </div>
@@ -191,6 +191,7 @@
 
 <script>
 import echarts from "@/components/charts/index";
+import { mapGetters } from "vuex";
 export default {
   name: "dashboard",
   components: { echarts },
@@ -328,6 +329,9 @@ export default {
         color: ["#fe883a", "#2d90d1", "#f75981", "#90e2a9"],
       },
     };
+  },
+  computed: {
+    ...mapGetters(["name", "avatar"]),
   },
   methods: {
     handleEdit(index, row) {
