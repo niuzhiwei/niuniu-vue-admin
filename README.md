@@ -16,11 +16,11 @@
 
 ### 基础表单
 
-![](https://i.bmp.ovh/imgs/2021/04/8623f456b1bb7e4e.png)
+![](https://i.bmp.ovh/imgs/2021/04/4aa8950e90b16ef1.png)
 
 ### 地图图表
 
-![](https://i.bmp.ovh/imgs/2021/04/4aa8950e90b16ef1.png)
+![](https://i.bmp.ovh/imgs/2021/04/e9ea8adfbd709322.png)
 
 ### 拖拽组件
 
